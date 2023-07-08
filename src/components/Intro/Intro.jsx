@@ -10,7 +10,7 @@ export default function Intro() {
     init(typeref.current, 
         { showCursor: true,
             backDelay: 1500,
-        strings: ['Developer', 'Designer'] })
+        strings: ['Web Developer', 'React native Developer', 'Problem Solver'] })
   }, [])
   return (
     <div className='Intro' id='intro'>
@@ -38,7 +38,7 @@ export default function Intro() {
               <h2>Hi There, I am</h2>
               <h1>Tushar Verma</h1>
               {/* <h3>A Web Ddeveoper, React native Developer & a Problem Solver</h3> */}
-              <h3>Freelance <span ref={typeref}></span></h3>
+              <h3>A <span ref={typeref}></span></h3>
             </div>
             <div className="btns">
               <a style={{textDecoration: 'none'}} href='https://drive.google.com/file/d/19VuWRETlTBUgwiX7ZrnPWHM4liWIlKIb/view' target='blank'><div className="lastButton">My Work</div></a>
