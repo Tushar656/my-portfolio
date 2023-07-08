@@ -1,0 +1,319 @@
+body {
+    /* background-image: linear-gradient(#0a0711, #120c1f); */
+    background-color: #1d1d1d;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --loaderSize: 400px;
+
+    --atom-color-hex: #0d00ff;
+    --nucleusSize: calc(var(--loaderSize) / 5);
+    --nucleusColor: #36C5F0;
+    --electronSize: calc(var(--loaderSize) / 25);
+    --electronOrbitSize: calc(var(--loaderSize) / 2.5);
+    --electron1Speed: 1.2s;
+    --electron2Speed: 1s;
+    --electron3Speed: .8s;
+}
+
+.loaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #202124;
+    color: white;
+    overflow: hidden;
+}
+
+/*LOADER*/
+.atom {
+    position: relative;
+    width: var(--loaderSize);
+    height: var(--loaderSize);
+    animation: 8s atom infinite cubic-bezier(1, .25, 0, .75);
+}
+
+@keyframes atom {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    12.5% {
+        transform: rotate(-45deg) scale(0.9);
+    }
+
+    25% {
+        transform: rotate(-90deg) scale(1);
+    }
+
+    37.5% {
+        transform: rotate(-135deg) scale(0.9);
+    }
+
+    50% {
+        transform: rotate(-180deg) scale(1);
+    }
+
+    62.5% {
+        transform: rotate(-225deg) scale(0.9);
+    }
+
+    75% {
+        transform: rotate(-270deg) scale(1);
+    }
+
+    87.5% {
+        transform: rotate(-315deg) scale(0.9);
+    }
+
+    100% {
+        transform: rotate(-360deg) scale(1);
+    }
+}
+
+/*NUCLEUS*/
+.atom::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: var(--nucleusSize);
+    height: var(--nucleusSize);
+    top: 50%;
+    left: 50%;
+    margin-top: calc(var(--nucleusSize) / -2);
+    margin-left: calc(var(--nucleusSize) / -2);
+    background-color: var(--nucleusColor);
+    border-radius: 50%;
+    box-shadow: 0 0 3px 0 var(--atom-color-hex);
+}
+
+/*ELECTRON ORBIT*/
+.atom>[class^="electron"] {
+    border-top: solid rgba(255, 0, 255, 0.5) 1px;
+    border-right: solid rgba(255, 0, 255, 0.35) 2px;
+    border-bottom: solid rgba(255, 0, 255, 0.2) 4px;
+    border-left: solid rgba(255, 0, 255, 0.0) 2px;
+
+    border-radius: 50%;
+    width: 100%;
+    height: var(--electronOrbitSize);
+    position: absolute;
+    top: 50%;
+    margin-top: calc(var(--electronOrbitSize) / -2);
+    /* animation: var(--electron1Speed) electronOrbit1 infinite linear; */
+}
+
+.atom>.electron1 {
+    animation: var(--electron1Speed) electronOrbit1 infinite linear;
+}
+
+.atom>.electron2 {
+    transform: rotate(60deg);
+    animation: var(--electron2Speed) electronOrbit2 infinite linear;
+    ;
+}
+
+.atom>.electron3 {
+    transform: rotate(-60deg);
+    animation: var(--electron3Speed) electronOrbit3 infinite linear;
+    ;
+}
+
+@keyframes electronOrbit1 {
+    0% {
+        border-top: solid rgba(255, 0, 255, 1) 3px;
+        border-right: solid rgba(255, 0, 255, 1) 5px;
+        border-bottom: solid rgba(255, 0, 255, .2) 7px;
+        border-left: solid rgba(255, 0, 255, 0) 7px;
+    }
+
+    25% {
+        border-top: solid rgba(255, 0, 255, .35) 3px;
+        border-right: solid rgba(255, 0, 255, .2) 5px;
+        border-bottom: solid rgba(255, 0, 255, 0) 7px;
+        border-left: solid rgba(255, 0, 255, .5) 7px;
+    }
+
+    50% {
+        border-top: solid rgba(255, 0, 255, .2) 3px;
+        border-right: solid rgba(255, 0, 255, 0) 5px;
+        border-bottom: solid rgba(255, 0, 255, .5) 7px;
+        border-left: solid rgba(255, 0, 255, .35) 7px;
+    }
+
+    75% {
+        border-top: solid rgba(255, 0, 255, 0) 3px;
+        border-right: solid rgba(255, 0, 255, .5) 5px;
+        border-bottom: solid rgba(255, 0, 255, .35) 7px;
+        border-left: solid rgba(255, 0, 255, .2) 7px;
+    }
+
+    100% {
+        border-top: solid rgba(255, 0, 255, 1) 3px;
+        border-right: solid rgba(255, 0, 255, 1) 5px;
+        border-bottom: solid rgba(255, 0, 255, 1) 7px;
+        border-left: solid rgba(255, 0, 255, 1) 7px;
+    }
+}
+
+@keyframes electronOrbit2 {
+    0% {
+        border-top: solid rgba(0, 247, 255, 1) 3px;
+        border-right: solid rgba(0, 247, 255, 1) 5px;
+        border-bottom: solid rgba(0, 247, 255, .2) 7px;
+        border-left: solid rgba(0, 247, 255, 0) 7px;
+    }
+
+    25% {
+        border-top: solid rgba(0, 247, 255, .35) 3px;
+        border-right: solid rgba(0, 247, 255, .2) 5px;
+        border-bottom: solid rgba(0, 247, 255, 0) 7px;
+        border-left: solid rgba(0, 247, 255, .5) 7px;
+    }
+
+    50% {
+        border-top: solid rgba(0, 247, 255, .2) 3px;
+        border-right: solid rgba(0, 247, 255, 0) 5px;
+        border-bottom: solid rgba(0, 247, 255, .5) 7px;
+        border-left: solid rgba(0, 247, 255, .35) 7px;
+    }
+
+    75% {
+        border-top: solid rgba(0, 247, 255, 0) 3px;
+        border-right: solid rgba(0, 247, 255, .5) 5px;
+        border-bottom: solid rgba(0, 247, 255, .35) 7px;
+        border-left: solid rgba(0, 247, 255, .2) 7px;
+    }
+
+    100% {
+        border-top: solid rgba(0, 247, 255, 1) 3px;
+        border-right: solid rgba(0, 247, 255, 1) 5px;
+        border-bottom: solid rgba(0, 247, 255, 1) 7px;
+        border-left: solid rgba(0, 247, 255, 1) 7px;
+    }
+}
+
+@keyframes electronOrbit3 {
+    0% {
+        border-top: solid rgba(0, 255, 10, 1) 3px;
+        border-right: solid rgba(0, 255, 10, 1) 5px;
+        border-bottom: solid rgba(0, 255, 10, .2) 7px;
+        border-left: solid rgba(0, 255, 10, 0) 7px;
+    }
+
+    25% {
+        border-top: solid rgba(0, 255, 10, .35) 3px;
+        border-right: solid rgba(0, 255, 10, .2) 5px;
+        border-bottom: solid rgba(0, 255, 10, 0) 7px;
+        border-left: solid rgba(0, 255, 10, .5) 7px;
+    }
+
+    50% {
+        border-top: solid rgba(0, 255, 10, .2) 3px;
+        border-right: solid rgba(0, 255, 10, 0) 5px;
+        border-bottom: solid rgba(0, 255, 10, .5) 7px;
+        border-left: solid rgba(0, 255, 10, .35) 7px;
+    }
+
+    75% {
+        border-top: solid rgba(0, 255, 10, 0) 3px;
+        border-right: solid rgba(0, 255, 10, .5) 5px;
+        border-bottom: solid rgba(0, 255, 10, .35) 7px;
+        border-left: solid rgba(0, 255, 10, .2) 7px;
+    }
+
+    100% {
+        border-top: solid rgba(0, 255, 10, 1) 3px;
+        border-right: solid rgba(0, 255, 10, 1) 5px;
+        border-bottom: solid rgba(0, 255, 10, 1) 7px;
+        border-left: solid rgba(0, 255, 10, 1) 7px;
+    }
+}
+
+
+/*ELECTRONS*/
+.atom [class^="electron"]::after {
+    content: '';
+    display: block;
+    width: var(--electronSize);
+    height: var(--electronSize);
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    margin-top: calc(var(--electronSize) / -2);
+    left: calc(var(--electronSize) / -1);
+    transform: scale(1);
+    animation: calc(var(--electron1Speed) * 2) electron infinite ease-in-out;
+}
+
+.atom .electron1::after {
+    background: #ECB22E;
+}
+
+.atom .electron2::after {
+    animation: calc(var(--electron2Speed) * 2) electron infinite ease-in-out;
+    background: #E01E5A;
+}
+
+.atom .electron3::after {
+    animation: calc(var(--electron3Speed) * 2) electron infinite ease-in-out;
+    background: #2EB67D;
+}
+
+@keyframes electron {
+    0% {
+        left: calc(var(--electronSize) / -1);
+        transform: scale(1);
+    }
+
+    12.5% {
+        top: 100%;
+        transform: scale(1.5);
+    }
+
+    25% {
+        left: 100%;
+        transform: scale(1);
+    }
+
+    37.5% {
+        top: 0%;
+        transform: scale(0.25);
+    }
+
+    50% {
+        left: calc(var(--electronSize) / -1);
+        transform: scale(1);
+    }
+
+    62.5% {
+        top: 100%;
+        transform: scale(1.5);
+    }
+
+    75% {
+        left: 100%;
+        transform: scale(1);
+    }
+
+    87.5% {
+        top: 0%;
+        ;
+        transform: scale(0.25);
+    }
+
+    100% {
+        left: calc(var(--electronSize) / -1);
+        transform: scale(1);
+    }
+}

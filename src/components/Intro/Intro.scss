@@ -1,0 +1,181 @@
+@import "../global.scss";
+
+.Intro{
+    height: calc(100vh - 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    .introContainor{
+        display: flex;
+        width: 90%;
+        height: 100%;
+        position: relative;
+        
+        @include lPY{
+            width: 98%;
+        }
+        
+        .introLeft{
+            position: absolute;
+            top: -65px;
+            left: 10px;
+            opacity: 0.9;
+            flex: 1;
+            // @include introLPy{
+            //     top: -150px;
+            // }
+            @include lPY{
+                opacity: 0.3;
+                top: -65px;
+            }
+            @include mobile{
+                opacity: 0.3;
+                top: -130px;
+            }
+        }
+
+        .IntroRight{
+            position: absolute;
+            top: 34%;
+            right: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            @include mobile{
+                left: 10px;
+                top: 43%;
+            }
+
+
+            .Heading{
+                color: rgb(225, 225, 225);
+
+                h1{
+                    font-size: 60px;
+                    margin: 15px 0px;
+                    color: rgb(211, 211, 211);
+                    @include mobile{
+                        color: rgb(239, 239, 239);
+                        font-size: 40px;
+                    }
+                }
+                h2{
+                    font-size: 40px;
+                    margin: 15px 0px;
+                    color: rgb(194, 190, 190);
+                    @include mobile{
+                        font-size: 25px;
+                        color: rgb(226, 221, 221);
+                    }
+                }
+                h3{
+                    font-size: 26px;
+                    margin: 15px 0px;
+                    color: #b4b4b4;
+
+                    span{
+                        color: rgb(218, 122, 122);
+                        font-size: inherit;
+        
+                    }
+                    .ityped-cursor{
+                        animation: blink 1s infinite;
+                    }
+                }
+            }
+
+            .btns{
+                display: flex;
+                .lastButton{
+                    margin-top: 20px;
+                    margin-right: 40px;
+                    height: 50px;
+                    width: 200px; 
+                    border-radius: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 2.5px solid rgb(71, 0, 214);
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: rgb(211, 211, 211);
+                    -webkit-box-shadow: 0px 0px 3px 0px rgba(26,30,240,0.83);
+                    -moz-box-shadow: 0px 0px 3px 0px rgba(26,30,240,0.83);
+                    box-shadow: 0px 0px 3px 0px rgba(26,30,240,0.83);
+                    cursor: pointer;
+                    background-color: #222223;
+                    transition: 0.4s all ease;
+    
+                    &:hover{
+                        background-color: #1b1b1b;
+                        border: 2.5px solid rgb(71, 0, 154);
+                        color: rgb(238, 238, 238);
+                    }
+
+                    @include mobile{
+                        height: 35px;
+                        width: 140px;
+                        border-radius: 35px;
+                        border: 1.7px solid rgb(71, 0, 214);
+                        font-size: 18px;
+                        margin-left: 20px;
+                        margin-right: 0px
+                    }
+                }
+            }
+        }
+    }
+
+
+    // UP Arrow
+    .downarw{
+        background-color: #6119be;
+        padding: 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        color: rgb(226, 226, 226);
+        animation: arrowblink 1s infinite;
+        cursor: pointer;
+        z-index: 4;
+        
+        @keyframes arrowblink{
+            50%{
+                bottom: 40px;
+            }
+        }
+        
+        .Downarrow{
+            font-size: 50px !important;
+        }
+        
+        @include lPY{
+            right: 15px;
+            bottom: 10px;
+            @keyframes arrowblink{
+                50%{
+                    bottom: 25px;
+                }
+            }
+        }
+        @include mobile{
+            width: 32px;
+            height: 32px;
+            @keyframes arrowblink{
+                50%{
+                    bottom: 20px;
+                }
+            }
+        }
+    }
+}

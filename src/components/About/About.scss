@@ -1,0 +1,82 @@
+@import "../global.scss";
+
+
+.AboutSection{
+    // background-color: aqua;
+    height: fit-content;
+
+    .About{
+        scroll-behavior: smooth;
+        width: 100%;
+        color: white;
+        display: flex;
+        align-items: center;
+        @include mobile{
+            flex-direction: column;
+            padding: 0px 2px;
+        }
+    
+        .aboutleft{
+            flex: 5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            padding: 0 40px;
+            cursor:default;
+
+            h1{
+                font-size: 3.2rem;
+                color: rgb(72, 197, 255);
+            }
+            p{
+                font-size: 1.1rem;
+                margin-bottom: 7px;
+                line-height: 1.5rem;
+
+                @include mobile{
+                    padding: 0px 10px;
+                }
+            }
+        }
+        .aboutright{
+            flex: 5;
+        }
+    }
+    .idIcons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        .image{
+            background-color: rgb(82, 82, 82);
+            border-radius: 50%;
+            padding: 20px;
+            margin: 30px 30px;
+            transition: all 0.7s;
+            cursor: pointer;
+    
+            @include mobile{
+                margin: 30px 12px;
+                padding: 8px;
+            }
+    
+            img{
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+    
+                @include mobile{
+                    width: 53px;
+                    height: 50px;
+                }
+            }
+        }
+        .image:hover{
+            background-color: rgb(230, 230, 230);
+        }
+    }
+}
