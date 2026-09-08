@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import './Intro.scss'
-import {KeyboardArrowUp} from '@material-ui/icons';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import {init} from 'ityped'
 
@@ -15,7 +14,7 @@ export default function Intro() {
   return (
     <div className='Intro' id='intro'>
       <div className="downarw">
-        <a href='#intro' style={{color: 'white'}}><KeyboardArrowUp className='Downarrow'/></a>
+        <a href='#intro' aria-label='Back to top' style={{color: 'white'}}><svg className='Downarrow' viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></a>
       </div>
       <div className="introContainor">
         <div data-aos-duration="1500" data-aos="zoom-in" className="introLeft" style={{opacity: window.innerWidth<1400 ? 0.3 : 0.9}}>
