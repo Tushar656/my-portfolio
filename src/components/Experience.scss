@@ -1,0 +1,211 @@
+@use "../styles/mixins" as *;
+
+.xp {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3rem);
+
+  &__job {
+    display: grid;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+
+    &:first-child { padding-top: 0; border-top: 0; }
+
+    @include md { grid-template-columns: 1fr; gap: 0.875rem; }
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4375rem;
+    align-items: flex-start;
+
+    @include md { flex-direction: row; align-items: center; gap: 0.625rem; }
+  }
+
+  &__period {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-3);
+    white-space: nowrap;
+  }
+
+  &__now {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.1875rem 0.5rem;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    background: var(--accent-soft);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+
+    i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-3);
+      box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.7);
+      animation: pulse-dot 2s ease-out infinite;
+    }
+  }
+
+  &__role { font-size: 1.1875rem; }
+
+  &__company {
+    margin-top: 0.25rem;
+    font-size: var(--t-sm);
+    color: var(--fg-2);
+  }
+
+  &__sep { color: var(--line-strong); }
+  &__loc { color: var(--fg-3); }
+
+  &__domain {
+    max-width: var(--measure);
+    margin-top: 0.5rem;
+    font-size: var(--t-sm);
+    color: var(--fg-3);
+  }
+
+  &__work {
+    position: relative;
+    margin-top: 1.25rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        300px circle at var(--mx, -300px) var(--my, -300px),
+        rgba(125, 157, 255, 0.07),
+        transparent 60%
+      );
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(94, 234, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0); }
+}
+
+.work {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+
+  &:last-child { border-bottom: 0; }
+
+  // Accent bar marks the open item.
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--grad);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+
+  &.is-open::before { transform: scaleY(1); }
+  &.is-open { background: var(--bg-elev-2); }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover { background: var(--bg-elev-2); }
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  &__metric {
+    flex: none;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--accent);
+
+    @include sm { display: none; }
+  }
+
+  &__sign {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--fg-3);
+    font-size: 0.75rem;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                color 0.2s ease, border-color 0.2s ease;
+  }
+
+  &.is-open &__sign {
+    transform: rotate(135deg);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  // Animate the row height itself; no JS measurement needed.
+  &__wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &.is-open &__wrap { grid-template-rows: 1fr; }
+
+  &__panel {
+    overflow: hidden;
+    padding: 0 1rem;
+  }
+
+  &.is-open &__panel { padding-bottom: 1.125rem; }
+
+  &__body {
+    max-width: var(--measure);
+    font-size: 0.9375rem;
+    color: var(--fg-2);
+  }
+
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.875rem;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .xp__now i { animation: none; }
+  .work__wrap { transition: none; }
+}

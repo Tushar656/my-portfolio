@@ -1,0 +1,23 @@
+@use "../styles/mixins" as *;
+
+.foot {
+  border-top: 1px solid var(--line);
+  padding-block: 1.75rem 2.25rem;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  &__who { font-size: var(--t-sm); color: var(--fg-2); }
+  &__role { color: var(--fg-3); }
+
+  &__built {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-3);
+  }
+}

@@ -1,39 +1,40 @@
-import About from "./components/About/About";
-import Intro from "./components/Intro/Intro";
-import Topbar from "./components/Topbar/Topbar";
-import "./App.scss"
-import { useEffect, useState } from "react";
-import Education from "./components/Education/Education";
-import Skills from "./components/Skills/Skills";
-import Projects from "./components/Projects/Projects";
-import Contact from "./components/Contact/Contact";
-// import Back from "./components/Background/Back";
-import AOS from 'aos';
-import "aos/dist/aos.css";
+import './styles/global.scss';
+import { useScrollSignals } from './lib/motion';
+import Backdrop from './components/Backdrop';
+import Nav from './components/Nav';
+import Hero from './components/Hero';
+import Capabilities from './components/Capabilities';
+import About from './components/About';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+// import Engineering from './components/Engineering';
+import Achievements from './components/Achievements';
+import Skills from './components/Skills';
+import Faq from './components/Faq';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-function App() {
-  useEffect(() => {
-    AOS.init();
-    AOS.refresh();
-  }, []);
-  const handelScroll = () => {
-    console.log("first")
-    AOS.refresh();
-  }
+export default function App() {
+  useScrollSignals();
+
   return (
-    <div className="App">
-      <Topbar/>
-      {/* <Back/> */}
-      <div onScroll={handelScroll} id="sections" className="sections">
-        <Intro/>
-        <About/>
-        <Education/>
-        <Skills/>
-        <Projects/>
-        <Contact/>
-      </div>
-    </div>
+    <>
+      <a className="skip" href="#main">Skip to content</a>
+      <Backdrop />
+      <Nav />
+      <main id="main">
+        <Hero />
+        <Capabilities />
+        <About />
+        <Experience />
+        <Projects />
+        {/* <Engineering /> */}
+        <Achievements />
+        <Skills />
+        <Faq />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }
-
-export default App;

@@ -1,0 +1,70 @@
+@use "../styles/mixins" as *;
+
+.skills {
+  display: grid;
+  gap: 0.75rem;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1rem 1.25rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    @include sm { grid-template-columns: 1fr; gap: 0.75rem; }
+  }
+
+  &__group {
+    padding-top: 0.4375rem;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4375rem 0.6875rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: var(--t-sm);
+    color: var(--fg-2);
+    transition: border-color 0.2s ease, color 0.2s ease,
+                background 0.2s ease, transform 0.2s ease;
+
+    svg {
+      font-size: 1.0625rem;
+      flex: none;
+      // Brand color, muted until hover so the grid stays calm.
+      color: var(--brand, var(--fg-3));
+      opacity: 0.85;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--brand, #7d9dff) 55%, transparent);
+      background: var(--bg-elev-2);
+      color: var(--fg);
+      transform: translateY(-2px);
+
+      svg { opacity: 1; transform: scale(1.08); }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__chip:hover { transform: none; }
+}

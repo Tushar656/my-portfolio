@@ -1,0 +1,65 @@
+@use "../styles/mixins" as *;
+
+.cmenu {
+  position: relative;
+  display: inline-flex;
+
+  &__pop {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 60;
+    width: 15.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: rgba(14, 27, 51, 0.97);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.95);
+    animation: cmenu-in 0.16s ease-out;
+
+    // Keep the panel on screen when the trigger sits at the right edge.
+    @include sm { left: auto; right: 0; }
+  }
+
+  &__addr {
+    padding: 0.4375rem 0.5rem 0.625rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-2);
+    word-break: break-all;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.125rem;
+    padding: 0.5rem;
+    background: none;
+    border: 0;
+    border-radius: 8px;
+    text-align: left;
+    font-size: var(--t-sm);
+    color: var(--fg-2);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    svg { flex: none; font-size: 0.9375rem; }
+
+    &:hover { background: var(--bg-elev-2); color: var(--fg); }
+  }
+
+  &__go { margin-left: auto; opacity: 0.6; font-size: 0.8125rem; }
+}
+
+@keyframes cmenu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmenu__pop { animation: none; }
+}

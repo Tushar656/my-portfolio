@@ -1,0 +1,266 @@
+@use "../styles/mixins" as *;
+
+.hero {
+  position: relative;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem);
+
+  &__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+
+    @include lg { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3125rem 0.75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--bg-elev-2);
+    font-size: var(--t-xs);
+    color: var(--fg-2);
+
+    i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-3);
+      box-shadow: 0 0 0 0 rgba(67, 224, 192, 0.7);
+      animation: pulse-dot 2.2s ease-out infinite;
+    }
+  }
+
+  &__title {
+    display: grid;
+    gap: 0.375rem;
+    margin-top: 1.25rem;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-wrap: balance;
+
+    em {
+      font-size: var(--t-hero);
+      font-style: italic;
+      font-weight: 700;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      // An italic glyph leans past its inline box; without the extra trailing
+      // space background-clip:text shears the last letter off.
+      display: inline-block;
+      padding-right: 0.14em;
+    }
+  }
+
+  &__titleTop {
+    font-size: clamp(1.0625rem, 0.9rem + 0.9vw, 1.5rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--fg-2);
+  }
+
+  &__summary {
+    max-width: 52ch;
+    margin-top: 1.25rem;
+    font-size: 1.0625rem;
+    color: var(--fg-2);
+  }
+
+  &__where {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4375rem;
+    margin-top: 1rem;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-3);
+  }
+
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 1.75rem;
+  }
+
+  &__visual {
+    position: relative;
+    display: grid;
+    place-items: center end;
+    min-height: 440px;
+
+    // Phones get a text-only hero; the portrait lives in About, and the
+    // figures are repeated there and in Experience.
+    @include sm { display: none; }
+  }
+}
+
+/* ---------------- portrait ---------------- */
+.portrait-wrap { position: relative; }
+
+.portrait {
+  position: relative;
+  // Lags behind the page slightly. --sy is published by useScrollSignals and
+  // pinned to 0 under prefers-reduced-motion, so this flattens automatically.
+  transform: translate3d(0, calc(var(--sy, 0) * 0.055px), 0);
+  will-change: transform;
+  width: min(320px, 74%);
+  margin-left: auto;   // keeps the face out of the left-hand card lane
+  @include lg { margin-inline: auto; }   // re-centre once the layout stacks
+
+  &__halo {
+    position: absolute;
+    inset: -10% -12% 6% -12%;
+    border-radius: 50%;
+    background:
+      radial-gradient(closest-side, rgba(46, 144, 255, 0.55), rgba(46, 144, 255, 0.12) 62%, transparent 74%);
+    filter: blur(2px);
+  }
+
+  &__img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    // Let the figure dissolve into the page rather than sit in a hard box.
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  }
+
+  &__fallback {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 5;
+    border-radius: 999px 999px 22px 22px;
+    background: var(--grad-deep);
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  }
+
+  &__mono {
+    font-family: var(--mono);
+    font-size: 3rem;
+    font-weight: 500;
+    color: rgba(124, 166, 255, 0.45);
+  }
+}
+
+/* ---------------- floating fact cards ---------------- */
+.fact {
+  position: absolute;
+  margin: 0;
+  width: 11.25rem;
+  padding: 0.6875rem 0.8125rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: rgba(14, 27, 51, 0.82);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.9);
+  animation:
+    enter-up 0.62s cubic-bezier(0.22, 1, 0.36, 1) both calc(var(--i, 0) * 75ms),
+    float-y 7s ease-in-out infinite calc(var(--i, 0) * 75ms + 0.7s);
+
+  &--1 { top: 5%;    left: 9%; }
+  &--2 { bottom: 0;  right: 0; }
+  &--3 { top: 46%;   left: 0; }
+
+  &__value {
+    display: block;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.1;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__label {
+    display: block;
+    margin-top: 0.125rem;
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  // The line that stops the number from being a floating figure.
+  &__context {
+    margin-top: 0.375rem;
+    padding-top: 0.375rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.6875rem;
+    line-height: 1.45;
+    color: var(--fg-3);
+  }
+
+  @include lg {
+    &--1 { top: 0;    left: 0; }
+    &--2 { bottom: 0; right: 0; }
+    &--3 { top: 46%;  left: 0; }
+  }
+
+}
+
+.hero__visual {
+  @include lg { place-items: center; }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.0625rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  transition: background 0.18s ease, border-color 0.18s ease,
+              color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    background: var(--bg-elev-2);
+    transform: translateY(-2px);
+  }
+
+  &--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #04101f;
+
+    svg { transition: transform 0.18s ease; }
+
+    &:hover {
+      background: #4aa2ff;
+      border-color: #4aa2ff;
+      box-shadow: 0 14px 30px -16px rgba(46, 144, 255, 0.8);
+      svg { transform: translateX(3px); }
+    }
+  }
+
+
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(67, 224, 192, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(67, 224, 192, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(67, 224, 192, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fact { animation: none; opacity: 1; transform: none; }
+  .portrait { transform: none; }
+  .hero__status i { animation: none; }
+  .btn:hover { transform: none; }
+}

@@ -1,0 +1,4 @@
+// Breakpoints. Max-width based, matching how the layout collapses.
+@mixin sm { @media (max-width: 640px)  { @content; } }
+@mixin md { @media (max-width: 900px)  { @content; } }
+@mixin lg { @media (max-width: 1120px) { @content; } }

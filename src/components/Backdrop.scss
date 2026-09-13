@@ -1,0 +1,73 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+
+  &__grid {
+    position: absolute;
+    inset: -1px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+    background-size: 64px 64px;
+    // Fade the grid out toward the edges so it reads as texture, not a table.
+    -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 78%);
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 78%);
+  }
+
+  // Wrapper carries the parallax offset; the glows keep their drift keyframes.
+  &__par {
+    position: absolute;
+    inset: 0;
+    transform: translate3d(0, calc(var(--sy, 0) * -0.03px), 0);
+    will-change: transform;
+  }
+
+  &__glow {
+    position: absolute;
+    width: 62vw;
+    height: 62vw;
+    min-width: 520px;
+    min-height: 520px;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.5;
+
+    &--a {
+      top: -26vw;
+      left: -14vw;
+      background: radial-gradient(closest-side, rgba(125, 157, 255, 0.16), transparent 70%);
+      animation: drift-a 26s ease-in-out infinite alternate;
+    }
+
+    &--b {
+      top: -14vw;
+      right: -20vw;
+      background: radial-gradient(closest-side, rgba(185, 140, 255, 0.13), transparent 70%);
+      animation: drift-b 32s ease-in-out infinite alternate;
+    }
+  }
+
+  // Subtle film grain keeps the large flat areas from banding.
+  &__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes drift-a {
+  to { transform: translate3d(8vw, 5vw, 0) scale(1.12); }
+}
+@keyframes drift-b {
+  to { transform: translate3d(-7vw, 8vw, 0) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop__glow { animation: none; }
+  .backdrop__par { transform: none; }
+}

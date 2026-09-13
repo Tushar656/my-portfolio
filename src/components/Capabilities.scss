@@ -1,0 +1,85 @@
+@use "../styles/mixins" as *;
+
+.caps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  @include lg { grid-template-columns: 1fr; }
+}
+
+.cap {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1.25rem;
+  overflow: hidden;
+
+  &__title {
+    margin-top: 1.125rem;
+    padding-inline: 0.25rem;
+    font-size: 1.0625rem;
+  }
+
+  &__body {
+    margin-top: 0.5rem;
+    padding-inline: 0.25rem;
+    font-size: var(--t-sm);
+    color: var(--fg-3);
+  }
+
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: auto;
+    padding: 1rem 0.25rem 0;
+  }
+}
+
+/* Blueprint illustration panel */
+.art {
+  display: grid;
+  place-items: center;
+  padding: 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background:
+    linear-gradient(160deg, rgba(46, 144, 255, 0.14), rgba(46, 144, 255, 0.02)),
+    repeating-linear-gradient(0deg, rgba(124, 166, 255, 0.06) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(90deg, rgba(124, 166, 255, 0.06) 0 1px, transparent 1px 14px);
+
+  &__svg {
+    width: 100%;
+    height: auto;
+
+    rect, circle, path {
+      fill: none;
+      stroke: var(--accent-2);
+      stroke-width: 1.4;
+    }
+  }
+
+  &__line { stroke: rgba(124, 166, 255, 0.5); stroke-dasharray: 4 4; }
+  &__dot  { fill: var(--accent-2); stroke: none; }
+  &__fill { fill: rgba(46, 144, 255, 0.14); }
+
+  &__flow {
+    fill: var(--accent-3);
+    stroke: none;
+    animation: art-flow 2.4s linear infinite;
+    &--2 { animation-delay: 1.2s; }
+  }
+}
+
+.cap:hover .art { border-color: var(--line-strong); }
+
+@keyframes art-flow {
+  0%   { transform: translateX(-14px); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateX(14px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art__flow { animation: none; }
+}

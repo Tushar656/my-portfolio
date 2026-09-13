@@ -1,0 +1,168 @@
+@use "../styles/mixins" as *;
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 12, 0.78);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+
+  &__progress {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background: var(--grad);
+    transform: scaleX(var(--sp, 0));
+    transform-origin: left center;
+    // scaleX only, so this never triggers layout.
+    will-change: transform;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: var(--nav-h);
+    transition: height 0.25s ease;
+  }
+
+  // Tightens once the hero is behind you.
+  :root.is-scrolled & {
+    background: rgba(7, 11, 20, 0.88);
+    box-shadow: 0 1px 0 0 var(--line), 0 10px 30px -22px rgba(0, 0, 0, 0.9);
+
+    .nav__inner { height: 54px; }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-right: auto;
+    min-width: 0;
+  }
+
+  &__mark {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    flex: none;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+  }
+
+  &__name {
+    font-size: var(--t-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1.375rem;
+
+    a {
+      position: relative;
+      font-size: var(--t-sm);
+      color: var(--fg-3);
+      transition: color 0.15s ease;
+
+      &:hover { color: var(--fg); }
+
+      &.is-active {
+        color: var(--fg);
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0; right: 0; bottom: -6px;
+          height: 1px;
+          background: var(--accent);
+        }
+      }
+    }
+
+    @include md { display: none; }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4375rem;
+    padding: 0.4375rem 0.8125rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 7px;
+    font-size: var(--t-sm);
+    font-weight: 500;
+    transition: background 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+  }
+
+  &__toggle {
+    display: none;
+    padding: 0.5rem;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    cursor: pointer;
+
+    @include md { display: block; }
+  }
+
+  &__burger {
+    display: grid;
+    gap: 3px;
+    width: 15px;
+
+    i {
+      display: block;
+      height: 1.5px;
+      background: var(--fg);
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    &.is-open {
+      i:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+      i:nth-child(2) { opacity: 0; }
+      i:nth-child(3) { transform: translateY(-4.5px) rotate(-45deg); }
+    }
+  }
+
+  &__mobile {
+    border-top: 1px solid var(--line);
+    background: var(--bg-elev);
+    padding-block: 0.5rem 0.875rem;
+
+    .container { display: grid; }
+
+    a {
+      padding: 0.625rem 0;
+      font-size: 0.9375rem;
+      color: var(--fg-2);
+      border-bottom: 1px solid var(--line);
+
+      &:last-child { border-bottom: 0; }
+      &:hover { color: var(--fg); }
+    }
+  }
+}
